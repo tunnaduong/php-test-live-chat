@@ -4,6 +4,9 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header("Access-Control-Allow-Headers: *");
 
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+
 /**
  * @param $value
  * @return mixed
@@ -26,7 +29,7 @@ $db = mysqli_connect($maychu, $tendangnhap, $matkhau, $tendb);
 $encodedData = file_get_contents('php://input');
 $decodedData = json_decode($encodedData, true);
 
-$content = $decodedData['content'];
+$content = $decodedData['content'] ?? "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($content) && !empty($content)) {
     // Fetch existing data
